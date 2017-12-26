@@ -1,1 +1,1 @@
-# gtk_glade_test
+# learning_gtk
