@@ -34,7 +34,7 @@ void on_button_clicked()
 
   if (++counter > 999) counter = 0;
 
-  sprintf(message, "Hello %3d", counter);
+  g_snprintf(message, 10, "Hello %3d", counter);
 
   label = GTK_LABEL( gtk_builder_get_object(builder, "label") );
   gtk_label_set_text(label, message);
