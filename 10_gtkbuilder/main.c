@@ -1,43 +1,5 @@
 #include <gtk/gtk.h>
-
-/* Define TfeTextView Widget */
-
-#define TFE_TYPE_TEXT_VIEW tfe_text_view_get_type()
-G_DECLARE_FINAL_TYPE(TfeTextView, tfe_text_view, TFE, TEXT_VIEW, GtkTextView)
-
-struct _TfeTextView
-{
-  GtkTextView parent;
-  GFile *file;
-};
-
-G_DEFINE_FINAL_TYPE(TfeTextView, tfe_text_view, GTK_TYPE_TEXT_VIEW);
-
-static void tfe_text_view_init(TfeTextView *textview)
-{
-  textview->file = NULL;
-}
-
-static void tfe_text_view_class_init(TfeTextViewClass *class)
-{
-}
-
-void tfe_text_view_set_file(TfeTextView *textview, GFile *f)
-{
-  textview->file = f;
-}
-
-GFile *tfe_text_view_get_file(TfeTextView *textview)
-{
-  return textview->file;
-}
-
-GtkWidget *tfe_text_view_new(void)
-{
-  return GTK_WIDGET(g_object_new(TFE_TYPE_TEXT_VIEW, NULL));
-}
-
-/* ---------------- end Define TfeTextView Widget */
+#include "tfetextview.h"
 
 static void app_activate(GApplication *app)
 {
@@ -60,7 +22,7 @@ static void app_open(GApplication *app, GFile **files, int n_files, char *hint)
   int i;
   GtkBuilder *builder;
 
-  builder = gtk_builder_new_from_file("tfe.ui");
+  builder = gtk_builder_new_from_resource("/tfe.ui");
   win = GTK_WIDGET(gtk_builder_get_object(builder, "win"));
   gtk_window_set_application(GTK_WINDOW(win), GTK_APPLICATION(app));
   notebook = GTK_WIDGET(gtk_builder_get_object(builder, "notebook"));
